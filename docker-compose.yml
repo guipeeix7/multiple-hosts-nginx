@@ -3,19 +3,22 @@ version: '3'
 services:
   webserver:
     image: nginx:alpine
-    container_name: webserver-tests
+    container_name: webserver
     restart: unless-stopped
     tty: true
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - /home/borgerpatsserie/project:/var/www
+      - /home/completeBariNginx/project:/var/www/completebari
+      - /home/borgespatisserie/project:/var/www/borgespatisserie
       - ./certs:/etc/ssl
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
-      - borgerpatsserie_app-network
-
+      - borgespatisserie_app-network
+      - completebaringinx_complete-bari-network-nginx
 networks:
-  borgerpatsserie_app-network:
+  borgespatisserie_app-network:
+    external: true
+  completebaringinx_complete-bari-network-nginx:
     external: true
